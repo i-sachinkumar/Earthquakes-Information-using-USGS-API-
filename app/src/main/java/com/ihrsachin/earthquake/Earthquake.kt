@@ -3,7 +3,10 @@ package com.ihrsachin.earthquake
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Earthquake(private val mag: Double, private val place: String, private val time: Long) {
+class Earthquake(private val mag: Double,
+                 private val place: String,
+                 private val time: Long,
+                 private val link : String) {
 
     public fun getMag() : String{
         return mag.toString()
@@ -31,5 +34,9 @@ class Earthquake(private val mag: Double, private val place: String, private val
     public fun getDate(): String{
         formatter = SimpleDateFormat("dd MMM yyyy", Locale("ENG","IND"))
         return formatter!!.format(dateObj)
+    }
+
+    public fun getLink() : String{
+        return link
     }
 }
