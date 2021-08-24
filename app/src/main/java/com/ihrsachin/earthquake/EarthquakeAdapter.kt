@@ -6,7 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 
+import android.content.ActivityNotFoundException
+
+import androidx.core.content.ContextCompat.startActivity
+
+import android.content.Intent
+import android.net.Uri
+import java.net.MalformedURLException
 
 
 class EarthquakeAdapter(context: Context, list: List<Earthquake>) : ArrayAdapter<Earthquake>(context, 0 , list){
@@ -31,6 +39,21 @@ class EarthquakeAdapter(context: Context, list: List<Earthquake>) : ArrayAdapter
 
         val distanceTextView : TextView = listViewItem.findViewById(R.id.distanceText)
         distanceTextView.text = current.getDistance()
+
+
+        // on click -> open url about clicked earthquake in browser
+        listViewItem.setOnClickListener{
+            try {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(current.getLink()))
+                startActivity(context, browserIntent, null)
+            } catch (e : ActivityNotFoundException){
+                Toast.makeText(context,"No Supported Application found!",Toast.LENGTH_SHORT)
+                .show()
+            } catch (e : MalformedURLException) {
+                Toast.makeText(context, "Invalid Url is provided", Toast.LENGTH_SHORT)
+                .show()
+            }
+        }
 
         return listViewItem
     }

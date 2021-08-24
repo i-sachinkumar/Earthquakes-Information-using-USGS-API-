@@ -87,7 +87,8 @@ class MyAsyncTaskLoader(context: Context, private val baseUrl: String?) :
                 val propertiesObj = jsonArray.getJSONObject(i - 1).getJSONObject("properties")
                 list.add(Earthquake(propertiesObj.getDouble("mag"),
                     propertiesObj.getString("place"),
-                    propertiesObj.getLong("time")))
+                    propertiesObj.getLong("time"),
+                    propertiesObj.getString("url")))
             }
         }
         return list

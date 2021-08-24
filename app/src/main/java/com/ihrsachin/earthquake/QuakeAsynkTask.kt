@@ -110,7 +110,7 @@ class QuakeAsynkTask() : AsyncTask<URL, Void, List<Earthquake>>() {
                 val magnitude = currObj.getDouble("mag")
                 val place = currObj.getString("place")
                 val time = currObj.getLong("time")
-                listOfQuake.add(Earthquake(magnitude,place,time))
+                listOfQuake.add(Earthquake(magnitude,place,time,currObj.getString("url")))
             }
         }
         return listOfQuake
